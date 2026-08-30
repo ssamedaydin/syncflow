@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.samedaydin.syncflow"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 37
     ndkVersion = flutter.ndkVersion
 
     compileOptions {

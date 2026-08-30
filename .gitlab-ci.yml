@@ -1,0 +1,46 @@
+image: ghcr.io/cirruslabs/flutter:3.44.8
+
+stages:
+  - analyze
+  - test
+  - build
+
+variables:
+  PUB_CACHE: "$CI_PROJECT_DIR/.pub-cache"
+
+cache:
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - .pub-cache/
+    - .dart_tool/
+
+before_script:
+  - flutter pub get
+
+analyze:
+  stage: analyze
+  script:
+    - dart format --output=none --set-exit-if-changed lib test
+    - flutter analyze
+
+test:
+  stage: test
+  script:
+    - flutter test --machine > test-report.json || true
+    - flutter test
+  artifacts:
+    when: always
+    paths:
+      - test-report.json
+    expire_in: 1 week
+
+build:apk:
+  stage: build
+  script:
+    - flutter build apk --debug
+  artifacts:
+    paths:
+      - build/app/outputs/flutter-apk/app-debug.apk
+    expire_in: 1 week
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

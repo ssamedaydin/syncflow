@@ -28,10 +28,10 @@ Built with Flutter, Riverpod and Drift on a Clean Architecture split
 - [x] Domain layer: entities, repository contracts, conflict and retry policies
 - [x] Drift database: work orders, outbox, sync metadata
 - [x] Sync engine: delta pull, outbox drain, conflict and retry handling
-- [ ] OAuth 2.0 / OIDC sign-in with secure token storage
-- [ ] Riverpod presentation layer: work order list, editor, sync status
-- [ ] Demo server for end-to-end sync
-- [ ] GitLab CI pipeline (analyze, test, build) and GitHub Actions mirror
+- [x] OAuth 2.0 / OIDC sign-in with secure token storage
+- [x] Riverpod presentation layer: work order list, editor, sync status
+- [x] Demo server for end-to-end sync
+- [x] GitLab CI pipeline (analyze, test, build) and GitHub Actions mirror
 
 ## Development
 
@@ -39,3 +39,14 @@ Built with Flutter, Riverpod and Drift on a Clean Architecture split
 flutter test
 dart run build_runner build --delete-conflicting-outputs
 ```
+
+The demo backend lives in `server/`:
+
+```
+cd server \&\& dart run syncflow_server
+```
+
+It serves the OAuth token endpoint and the delta/push API on port 8088 with a
+demo user (`saha` / `1234`). The app defaults to `http://10.0.2.2:8088`
+(Android emulator to host); on a real device pass
+`--dart-define=SYNCFLOW_SERVER=http://<host-ip>:8088`.

@@ -1,0 +1,11 @@
+name: syncflow_server
+description: "SyncFlow demo backend: OAuth token endpoint and delta sync API."
+version: 0.1.0
+publish_to: 'none'
+
+environment:
+  sdk: ^3.12.0
+
+dependencies:
+  shelf: ^1.4.2
+  shelf_router: ^1.1.4
