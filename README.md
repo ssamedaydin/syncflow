@@ -43,7 +43,7 @@ dart run build_runner build --delete-conflicting-outputs
 The demo backend lives in `server/`:
 
 ```
-cd server \&\& dart run syncflow_server
+cd server && dart run syncflow_server
 ```
 
 It serves the OAuth token endpoint and the delta/push API on port 8088 with a
